@@ -48,10 +48,6 @@ function App() {
     trainers.forEach((trainer) => (trainer.reputation *= 2));
   };
 
-  clients.sort(function (a, b) {
-    return a.impReputation - b.impReputation;
-  });
-
   const handleShownTrainers = (value, index, id, position) => {
     if (id === "name") {
       arrShownTrainers[index].name = value;

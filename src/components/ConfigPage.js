@@ -7,8 +7,6 @@ function ConfigPage(props) {
     props.handleShownTrainers(value, index, id);
   };
   const handleNewArr = () => {
-    "paso por aqui";
-    // const dataCopy = JSON.parse(JSON.stringify(props.shownTrainers));
     props.handleTrainers();
   };
   const trainersList = props.shownTrainers.map((trainer, index) => {
