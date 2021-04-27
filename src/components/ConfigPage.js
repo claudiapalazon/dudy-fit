@@ -5,11 +5,12 @@ import TrainersForm from "./TrainersForm";
 function ConfigPage(props) {
   const handleForm = (value, index, id) => {
     props.handleShownTrainers(value, index, id);
-    const identification = props.shownTrainers[index].id;
-    props.handleTrainers(value, identification, id);
   };
-  console.log(props.trainers);
-  console.log(props.shownTrainers);
+  const handleNewArr = () => {
+    "paso por aqui";
+    // const dataCopy = JSON.parse(JSON.stringify(props.shownTrainers));
+    props.handleTrainers();
+  };
   const trainersList = props.shownTrainers.map((trainer, index) => {
     return (
       <li key={trainer.id} className="trainerForm">
@@ -26,7 +27,11 @@ function ConfigPage(props) {
   return (
     <>
       <ul className="trainersList">{trainersList}</ul>
-      <Link to="/results" className="btn-sm btn-primary float-right button">
+      <Link
+        onClick={handleNewArr}
+        to="/results"
+        className="btn-sm btn-primary float-right button"
+      >
         Calcular Resultados
       </Link>
       <PrepareModal clients={props.clients} />

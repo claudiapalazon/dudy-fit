@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Route, Switch } from "react-router-dom";
-
 import "./styles/App.scss";
 import { Container } from "react-bootstrap";
 import dataTrainers from "./services/trainers.json";
@@ -10,17 +9,17 @@ import ResultPage from "./components/ResultPage";
 
 function App() {
   let arrShownTrainers = JSON.parse(JSON.stringify(dataTrainers));
-  let arrTrainers = JSON.parse(JSON.stringify(dataTrainers));
   let clients = JSON.parse(JSON.stringify(dataClients));
-
-  const [trainers, setTrainers] = useState(arrTrainers);
   const [shownTrainers, setShownTrainers] = useState(arrShownTrainers);
+  let arr = [];
+  const [sufPlaces, setPlaces] = useState(false);
 
-  const handlePlaces = () => {
+  const handlePlaces = (trainers) => {
     let places = 0;
     for (let i = 0; i < trainers.length; i++) {
       places += trainers[i].places;
     }
+    places < clients.length ? setPlaces(true) : setPlaces(false);
     let restPlaces = 0;
     if (places > clients.length) {
       restPlaces = places - clients.length;
@@ -45,44 +44,19 @@ function App() {
       }
     }
   };
-  const handleReputation = () => {
+  const handleReputation = (trainers) => {
     trainers.forEach((trainer) => (trainer.reputation *= 2));
   };
-
-  handlePlaces();
-  handleReputation();
 
   clients.sort(function (a, b) {
     return a.impReputation - b.impReputation;
   });
 
-  const handleTrainers = (value, index, id) => {
-    let positionArray;
-    for (let i = 0; i < arrTrainers.length; i++) {
-      if (arrTrainers[i].id === index) {
-        positionArray = i;
-        break;
-      }
-    }
-    if (id === "name") {
-      arrTrainers[positionArray].name = value;
-    } else if (id === "reputation") {
-      let number = parseFloat(value);
-      arrTrainers[positionArray].reputation = number * 2;
-    } else if (id === "places") {
-      let number = parseInt(value);
-      arrTrainers[positionArray].places = number;
-    }
-    setTrainers(arrTrainers);
-    handlePlaces();
-  };
-
-  const handleShownTrainers = (value, index, id) => {
+  const handleShownTrainers = (value, index, id, position) => {
     if (id === "name") {
       arrShownTrainers[index].name = value;
     } else if (id === "reputation") {
       let number = parseFloat(value);
-      // if (number > 5 )
       arrShownTrainers[index].reputation = number;
     } else if (id === "places") {
       let number = parseInt(value);
@@ -91,12 +65,20 @@ function App() {
     setShownTrainers(arrShownTrainers);
   };
 
+  const handleTrainers = () => {
+    const myJSONCopy = JSON.parse(JSON.stringify(arrShownTrainers));
+    arr = myJSONCopy;
+    console.log(shownTrainers);
+    console.log(arr);
+    handlePlaces(arr);
+    handleReputation(arr);
+  };
+
   return (
     <Container fluid>
       <Switch>
         <Route exact path="/">
           <ConfigPage
-            trainers={trainers}
             clients={clients}
             handleTrainers={handleTrainers}
             shownTrainers={shownTrainers}
@@ -104,7 +86,7 @@ function App() {
           />
         </Route>
         <Route path="/results">
-          <ResultPage />
+          <ResultPage trainers={arr} places={sufPlaces} />
         </Route>
       </Switch>
     </Container>
