@@ -1,29 +1,16 @@
-import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import dataTrainers from "../services/trainers.json";
 import PrepareModal from "./PrepareModal";
 import TrainersForm from "./TrainersForm";
 
 function ConfigPage(props) {
-  let arrTrainers = JSON.parse(JSON.stringify(dataTrainers));
-  const [trainers, setTrainers] = useState(arrTrainers);
-  console.log(trainers);
   const handleForm = (value, index, id) => {
-    if (id === "name") {
-      arrTrainers[index].name = value;
-    } else if (id === "reputation") {
-      let number = parseFloat(value);
-      arrTrainers[index].reputation = number;
-    } else if (id === "places") {
-      let number = parseInt(value);
-      arrTrainers[index].places = number;
-    }
-    const identification = trainers[index].id;
+    props.handleShownTrainers(value, index, id);
+    const identification = props.shownTrainers[index].id;
     props.handleTrainers(value, identification, id);
-    setTrainers(arrTrainers);
-    console.log(trainers);
   };
-  const trainersList = trainers.map((trainer, index) => {
+  console.log(props.trainers);
+  console.log(props.shownTrainers);
+  const trainersList = props.shownTrainers.map((trainer, index) => {
     return (
       <li key={trainer.id} className="trainerForm">
         <TrainersForm

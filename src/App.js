@@ -9,10 +9,12 @@ import ConfigPage from "./components/ConfigPage";
 import ResultPage from "./components/ResultPage";
 
 function App() {
+  let arrShownTrainers = JSON.parse(JSON.stringify(dataTrainers));
   let arrTrainers = JSON.parse(JSON.stringify(dataTrainers));
   let clients = JSON.parse(JSON.stringify(dataClients));
 
   const [trainers, setTrainers] = useState(arrTrainers);
+  const [shownTrainers, setShownTrainers] = useState(arrShownTrainers);
 
   const handlePlaces = () => {
     let places = 0;
@@ -75,6 +77,20 @@ function App() {
     handlePlaces();
   };
 
+  const handleShownTrainers = (value, index, id) => {
+    if (id === "name") {
+      arrShownTrainers[index].name = value;
+    } else if (id === "reputation") {
+      let number = parseFloat(value);
+      // if (number > 5 )
+      arrShownTrainers[index].reputation = number;
+    } else if (id === "places") {
+      let number = parseInt(value);
+      arrShownTrainers[index].places = number;
+    }
+    setShownTrainers(arrShownTrainers);
+  };
+
   return (
     <Container fluid>
       <Switch>
@@ -83,6 +99,8 @@ function App() {
             trainers={trainers}
             clients={clients}
             handleTrainers={handleTrainers}
+            shownTrainers={shownTrainers}
+            handleShownTrainers={handleShownTrainers}
           />
         </Route>
         <Route path="/results">

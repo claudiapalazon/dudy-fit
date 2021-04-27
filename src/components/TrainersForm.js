@@ -1,7 +1,8 @@
-import React from "react";
-import { Form } from "react-bootstrap";
+import React, { useState } from "react";
+import { Form, Alert } from "react-bootstrap";
 
 function TrainersForm(props) {
+  const [show, setShow] = useState(false);
   const optionPlaces = props.clients.map((client, number) => {
     return <option key={number}>{number + 1}</option>;
   });
@@ -10,6 +11,14 @@ function TrainersForm(props) {
     let index = props.index;
     let id = env.currentTarget.id;
 
+    if (id === "reputation") {
+      if (!value || isNaN(value) || value > 5 || value < 0) {
+        value = 0;
+        setShow(true);
+      } else {
+        setShow(false);
+      }
+    }
     props.handleForm(value, index, id);
   };
 
@@ -39,6 +48,13 @@ function TrainersForm(props) {
           defaultValue={props.trainer.reputation}
           onChange={handleInputs}
         />
+        {show ? (
+          <Alert className="alert mb-0" variant="danger">
+            Por favor, escribe números del 0 al 5
+          </Alert>
+        ) : (
+          ""
+        )}
         <Form.Label className="my-1 mr-2" htmlFor="inlineFormCustomSelectPref">
           Número máximo de clientes
         </Form.Label>
