@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "name": "A",
+    "reputation": 4.5,
+    "places": 1
+  },
+  {
+    "id": 2,
+    "name": "B",
+    "reputation": 3.2,
+    "places": 4
+  },
+  {
+    "id": 3,
+    "name": "C",
+    "reputation": 1.2,
+    "places": 3
+  },
+  {
+    "id": 4,
+    "name": "D",
+    "reputation": 3.4,
+    "places": 2
+  }
+]

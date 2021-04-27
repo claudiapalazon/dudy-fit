@@ -1,0 +1,52 @@
+[
+  {
+    "id": 1,
+    "name": "q",
+    "impReputation": 2.6
+  },
+  {
+    "id": 2,
+    "name": "r",
+    "impReputation": 3.7
+  },
+  {
+    "id": 3,
+    "name": "s",
+    "impReputation": 8.5
+  },
+  {
+    "id": 4,
+    "name": "t",
+    "impReputation": 9.7
+  },
+  {
+    "id": 5,
+    "name": "u",
+    "impReputation": 2.6
+  },
+  {
+    "id": 6,
+    "name": "v",
+    "impReputation": 4.7
+  },
+  {
+    "id": 7,
+    "name": "w",
+    "impReputation": 5.6
+  },
+  {
+    "id": 8,
+    "name": "x",
+    "impReputation": 3.7
+  },
+  {
+    "id": 9,
+    "name": "y",
+    "impReputation": 8.1
+  },
+  {
+    "id": 10,
+    "name": "z",
+    "impReputation": 2.5
+  }
+]
