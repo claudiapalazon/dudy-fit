@@ -13,8 +13,12 @@ function TrainersForm(props) {
 
     if (id === "reputation") {
       if (!value || isNaN(value) || value > 5 || value < 0) {
-        value = 0;
         setShow(true);
+        if (value < 0) {
+          value = 0;
+        } else if (value > 5) {
+          value = 5;
+        }
       } else {
         setShow(false);
       }

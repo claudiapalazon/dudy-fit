@@ -1,31 +1,73 @@
-import { React } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import dataClients from "../services/clients.json";
+import ResultView from "./ResultView";
 
 function ResultPage(props) {
-  // console.log(props.prueba);
+  let sufPlaces = false;
+  const arr = JSON.parse(JSON.stringify(props.trainers));
   let clients = JSON.parse(JSON.stringify(dataClients));
+
   clients.sort(function (a, b) {
     return a.impReputation - b.impReputation;
   });
+
+  const handlePlaces = (trainers) => {
+    let places = 0;
+    for (let i = 0; i < trainers.length; i++) {
+      places += trainers[i].places;
+    }
+    places < clients.length ? (sufPlaces = true) : (sufPlaces = false);
+    let restPlaces = 0;
+    if (places > clients.length) {
+      restPlaces = places - clients.length;
+    }
+    trainers.sort(function (a, b) {
+      return a.reputation - b.reputation;
+    });
+
+    if (restPlaces) {
+      for (let i = 0; i < trainers.length; ) {
+        if (trainers[i].places > restPlaces) {
+          trainers[i].places -= restPlaces;
+          break;
+        } else if (trainers[i].places === restPlaces) {
+          trainers.splice(i, 1);
+          break;
+        } else if (trainers[i].places < restPlaces) {
+          restPlaces -= trainers[i].places;
+          trainers.splice(i, 1);
+        }
+        i = 0;
+      }
+    }
+  };
+  const handleReputation = (trainers) => {
+    trainers.forEach((trainer) => (trainer.reputation *= 2));
+  };
+
+  handlePlaces(arr);
+  handleReputation(arr);
+  console.log(arr);
+
   for (let i = 0; i < clients.length; i++) {
     clients[i].satisfaction = [];
-    // for (let index = 0; i < props.trainers.length; index++) {
-    //   // console.log("paso por aquiii");
-    //   let satisfaction =
-    //     10 - (clients[i].impReputation - props.trainers[index].reputation);
-    //   console.log(satisfaction);
-    //   clients[i].satisfaction.push(
-    //     `${props.trainers[index].name}: ${satisfaction}`
-    //   );
-    // }
+    for (let index = 0; index < arr.length; index++) {
+      let satisfaction =
+        10 - (clients[i].impReputation - arr[index].reputation);
+      clients[i].satisfaction.push({
+        name: arr[index].name,
+        places: arr[index].places,
+        satisfaction: satisfaction,
+      });
+    }
   }
   return (
     <>
-      {props.places ? (
+      {sufPlaces ? (
         <h1>No hay suficientes plazas para los clientes</h1>
       ) : (
-        <h1>Página de resultados</h1>
+        <ResultView trainers={arr} clients={clients} />
       )}
       <Link to="/" className="btn-sm btn-primary float-right button">
         Volver

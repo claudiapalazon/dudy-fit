@@ -6,9 +6,6 @@ function ConfigPage(props) {
   const handleForm = (value, index, id) => {
     props.handleShownTrainers(value, index, id);
   };
-  const handleNewArr = () => {
-    props.handleTrainers();
-  };
   const trainersList = props.shownTrainers.map((trainer, index) => {
     return (
       <li key={trainer.id} className="trainerForm">
@@ -25,11 +22,7 @@ function ConfigPage(props) {
   return (
     <>
       <ul className="trainersList">{trainersList}</ul>
-      <Link
-        onClick={handleNewArr}
-        to="/results"
-        className="btn-sm btn-primary float-right button"
-      >
+      <Link to="/results" className="btn-sm btn-primary float-right button">
         Calcular Resultados
       </Link>
       <PrepareModal clients={props.clients} />
