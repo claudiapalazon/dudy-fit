@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import PrepareModal from "./PrepareModal";
 import TrainersForm from "./TrainersForm";
+import { ListGroup } from "react-bootstrap";
 
 function ConfigPage(props) {
   const handleForm = (value, index, id) => {
@@ -8,20 +9,23 @@ function ConfigPage(props) {
   };
   const trainersList = props.shownTrainers.map((trainer, index) => {
     return (
-      <li key={trainer.id} className="trainerForm">
+      <ListGroup.Item key={trainer.id}>
+        {/* <li key={trainer.id} className="trainerForm"> */}
         <TrainersForm
           trainer={trainer}
           clients={props.clients}
           index={index}
           handleForm={handleForm}
         />
-      </li>
+        {/* </li> */}
+      </ListGroup.Item>
     );
   });
 
   return (
     <>
-      <ul className="trainersList">{trainersList}</ul>
+      <ListGroup variant="flush">{trainersList}</ListGroup>
+      {/* <ul className="trainersList">{trainersList}</ul> */}
       <Link to="/results" className="btn-sm btn-primary float-right button">
         Calcular Resultados
       </Link>

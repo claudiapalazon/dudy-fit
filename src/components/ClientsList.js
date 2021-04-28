@@ -5,8 +5,8 @@ function ClientsList(props) {
   return (
     <>
       <Row>
-        <Col>{props.client.name}</Col>
-        <Col>{props.client.impReputation}</Col>
+        <Col>Nombre cliente: {props.client.name}</Col>
+        <Col>Importancia reputación: {props.client.impReputation}</Col>
       </Row>
     </>
   );

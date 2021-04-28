@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { Tabs, Tab, Row, Col } from "react-bootstrap";
 import dataClients from "../services/clients.json";
 import ResultView from "./ResultView";
 
@@ -47,11 +48,31 @@ function ResultPage(props) {
 
   return (
     <>
-      {sufPlaces ? (
-        <h1>No hay suficientes plazas para los clientes</h1>
-      ) : (
-        <ResultView trainers={arr} clients={clients} />
-      )}
+      <Row>
+        <Col>
+          <Tabs
+            className="results"
+            defaultActiveKey="results"
+            id="uncontrolled-tab-example"
+          >
+            <Tab eventKey="results" title="Resultados">
+              {sufPlaces ? (
+                <h1>No hay suficientes plazas para los clientes</h1>
+              ) : (
+                <ResultView
+                  trainers={arr}
+                  clients={clients}
+                  trainersfiltered={props.trainers}
+                />
+              )}
+            </Tab>
+            <Tab eventKey="satisfaction" title="Valoración Global">
+              <p>Soy otro</p>
+            </Tab>
+          </Tabs>
+        </Col>
+      </Row>
+
       <Link to="/" className="btn-sm btn-primary float-right button">
         Volver
       </Link>

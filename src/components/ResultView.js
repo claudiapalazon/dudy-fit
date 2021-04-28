@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
+import Cards from "./Cards";
+import { CardColumns } from "react-bootstrap";
 
 function ResultView(props) {
   let clients = JSON.parse(JSON.stringify(props.clients));
@@ -73,11 +75,16 @@ function ResultView(props) {
     }
   }
   console.log(finalTrainers);
-  return (
-    <>
-      <div>Página de resultados</div>
-    </>
-  );
+  console.log(props.trainers);
+  console.log(props.trainersfiltered);
+
+  const finalArr = props.trainersfiltered.map((trainer, index) => {
+    return (
+      <Cards key={index} trainer={trainer} clientstrainer={finalTrainers} />
+    );
+  });
+
+  return <CardColumns className="cards mx-auto">{finalArr}</CardColumns>;
 }
 
 export default ResultView;

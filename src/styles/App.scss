@@ -8,14 +8,14 @@ body {
   padding-bottom: 30px;
 }
 
-.table-trainer {
-  padding: 10px 0 10px 0;
-  border-bottom: 1px solid grey;
-}
-.trainersList {
-  list-style: none;
-  padding: 0;
-}
+// .table-trainer {
+//   padding: 10px 0 10px 0;
+//   border-bottom: 1px solid grey;
+// }
+// .trainersList {
+//   list-style: none;
+//   padding: 0;
+// }
 .button {
   margin: 10px;
 }
@@ -26,4 +26,30 @@ body {
   justify-content: center;
   align-items: center;
   margin-right: 5px;
+}
+
+// .results {
+//   width: 1000px;
+//   border: 1px solid grey;
+// }
+
+// .cards {
+//   padding: 20px;
+//   background-color: red;
+//   display: flex;
+//   @media (max-width: 900px) {
+//     flex-wrap: wrap;
+//   }
+//   // justify-content: center;
+//   // flex-wrap: inherit;
+// }
+
+.card-columns {
+  // background-color: red;
+  border: 1px solid grey;
+  @media (min-width: 576px) {
+    column-count: 2 !important;
+    padding: 20px !important;
+    max-width: 900px !important;
+  }
 }

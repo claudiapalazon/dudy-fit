@@ -1,13 +1,13 @@
 import { React } from "react";
-import { Modal, Button } from "react-bootstrap";
+import { Modal, Button, ListGroup } from "react-bootstrap";
 import ClientsList from "./ClientsList";
 
 function ModalItem(props) {
   const clients = props.clients.map((client, index) => {
     return (
-      <li key={index}>
+      <ListGroup.Item key={index}>
         <ClientsList client={client} />
-      </li>
+      </ListGroup.Item>
     );
   });
   return (
@@ -24,7 +24,7 @@ function ModalItem(props) {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <ul className="clientsList">{clients}</ul>
+        <ListGroup variant="flush">{clients}</ListGroup>
       </Modal.Body>
       <Modal.Footer>
         <Button onClick={props.onHide}>Salir</Button>
