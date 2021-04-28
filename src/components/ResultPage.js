@@ -8,10 +8,6 @@ function ResultPage(props) {
   const arr = JSON.parse(JSON.stringify(props.trainers));
   let clients = JSON.parse(JSON.stringify(dataClients));
 
-  clients.sort(function (a, b) {
-    return a.impReputation - b.impReputation;
-  });
-
   const handlePlaces = (trainers) => {
     let places = 0;
     for (let i = 0; i < trainers.length; i++) {
@@ -48,20 +44,7 @@ function ResultPage(props) {
 
   handlePlaces(arr);
   handleReputation(arr);
-  console.log(arr);
 
-  for (let i = 0; i < clients.length; i++) {
-    clients[i].satisfaction = [];
-    for (let index = 0; index < arr.length; index++) {
-      let satisfaction =
-        10 - (clients[i].impReputation - arr[index].reputation);
-      clients[i].satisfaction.push({
-        name: arr[index].name,
-        places: arr[index].places,
-        satisfaction: satisfaction,
-      });
-    }
-  }
   return (
     <>
       {sufPlaces ? (
