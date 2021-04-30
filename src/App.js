@@ -16,7 +16,6 @@ function App() {
     if (id === "name") {
       arrShownTrainers[index].name = value;
     } else if (id === "reputation") {
-      console.log(value);
       if (isNaN(value) || !value) {
         value = 0;
       }

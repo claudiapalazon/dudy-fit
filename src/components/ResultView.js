@@ -30,28 +30,24 @@ function ResultView(props) {
 
   for (let i = 0; i < clients.length; i++) {
     for (let index = 0; index < clients[i].satisfaction.length; index++) {
-      console.log("paso por aqui");
       if (
         clients[i].satisfaction[index].reputation < clients[i].impReputation
       ) {
         clients[i].satisfaction[index].selected = true;
       } else {
         if (clients[i].satisfaction[index].satisfaction === 10) {
-          clients[i].satisfaction[index].selected = "diez";
+          clients[i].satisfaction[index].selected = "ten";
         }
       }
     }
   }
-  console.log(clients);
   for (let i = 0; i < clients.length; i++) {
     for (let index = 0; index < clients[i].satisfaction.length; index++) {
       if (
         clients[i].satisfaction[index].selected === true &&
         trainers[index].places > 0
       ) {
-        console.log("Plazas: " + trainers[index].places);
         trainers[index].places -= 1;
-        console.log(trainers[index].name + clients[i].name);
         finalTrainers.push({
           trainerName: trainers[index].name,
           clientName: clients[i].name,
@@ -59,12 +55,10 @@ function ResultView(props) {
         });
         break;
       } else if (
-        clients[i].satisfaction[index].selected === "diez" &&
+        clients[i].satisfaction[index].selected === "ten" &&
         trainers[index].places > 0
       ) {
-        console.log("Plazas: " + trainers[index].places);
         trainers[index].places -= 1;
-        console.log(trainers[index].name + clients[i].name);
         finalTrainers.push({
           trainerName: trainers[index].name,
           clientName: clients[i].name,
@@ -74,13 +68,25 @@ function ResultView(props) {
       }
     }
   }
+  console.log(clients);
   console.log(finalTrainers);
   console.log(props.trainers);
   console.log(props.trainersfiltered);
 
+  let globalValoration = 0;
+  for (let i = 0; i < finalTrainers.length; i++) {
+    globalValoration += finalTrainers[i].satisfaction;
+  }
+  props.handleValoration(globalValoration);
+
   const finalArr = props.trainersfiltered.map((trainer, index) => {
     return (
-      <Cards key={index} trainer={trainer} clientstrainer={finalTrainers} />
+      <Cards
+        key={index}
+        trainer={trainer}
+        clientstrainer={finalTrainers}
+        index={index + 1}
+      />
     );
   });
 

@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Tabs, Tab, Row, Col } from "react-bootstrap";
 import dataClients from "../services/clients.json";
 import ResultView from "./ResultView";
+import Valoration from "./Valoration";
 
 function ResultPage(props) {
   let sufPlaces = false;
   const arr = JSON.parse(JSON.stringify(props.trainers));
   let clients = JSON.parse(JSON.stringify(dataClients));
+  const [globalValoration, setGlovalValoration] = useState(0);
 
   const handlePlaces = (trainers) => {
     let places = 0;
@@ -46,6 +48,15 @@ function ResultPage(props) {
   handlePlaces(arr);
   handleReputation(arr);
 
+  let numValoration;
+  const handleNumValoration = (valoration) => {
+    numValoration = valoration;
+  };
+
+  const handleValoration = () => {
+    setGlovalValoration(numValoration);
+  };
+
   return (
     <>
       <Row>
@@ -54,6 +65,7 @@ function ResultPage(props) {
             className="results"
             defaultActiveKey="results"
             id="uncontrolled-tab-example"
+            onSelect={handleValoration}
           >
             <Tab eventKey="results" title="Resultados">
               {sufPlaces ? (
@@ -63,11 +75,12 @@ function ResultPage(props) {
                   trainers={arr}
                   clients={clients}
                   trainersfiltered={props.trainers}
+                  handleValoration={handleNumValoration}
                 />
               )}
             </Tab>
             <Tab eventKey="satisfaction" title="Valoración Global">
-              <p>Soy otro</p>
+              <Valoration globalValoration={globalValoration} />
             </Tab>
           </Tabs>
         </Col>

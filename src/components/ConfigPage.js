@@ -10,14 +10,12 @@ function ConfigPage(props) {
   const trainersList = props.shownTrainers.map((trainer, index) => {
     return (
       <ListGroup.Item key={trainer.id}>
-        {/* <li key={trainer.id} className="trainerForm"> */}
         <TrainersForm
           trainer={trainer}
           clients={props.clients}
           index={index}
           handleForm={handleForm}
         />
-        {/* </li> */}
       </ListGroup.Item>
     );
   });
@@ -25,7 +23,6 @@ function ConfigPage(props) {
   return (
     <>
       <ListGroup variant="flush">{trainersList}</ListGroup>
-      {/* <ul className="trainersList">{trainersList}</ul> */}
       <Link to="/results" className="btn-sm btn-primary float-right button">
         Calcular Resultados
       </Link>
