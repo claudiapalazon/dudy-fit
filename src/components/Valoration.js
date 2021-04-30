@@ -29,10 +29,10 @@ function Valoration(props) {
         de la reputación - reputación del entrenador). Obteniendo de esta manera
         un valor comprendido entre 0 y 10, siendo 0 la menor satisfacción y 10
         la mayor (los valores obtenidos por encima de 10 se toman como 10).
-        <p className="solutionText">
-          <br />A continuación se muestran el valor de satisfacción de cada
-          cliente con su entrenador asignado:
-        </p>
+      </p>
+      <p className="solutionText">
+        A continuación se muestran el valor de satisfacción de cada cliente con
+        su entrenador asignado:
       </p>
       <ListGroup variant="flush">{valorations}</ListGroup>
     </Container>
