@@ -12,7 +12,8 @@ function App() {
   let clients = JSON.parse(JSON.stringify(dataClients));
   const [shownTrainers, setShownTrainers] = useState(arrShownTrainers);
 
-  const handleShownTrainers = (value, index, id, position) => {
+  //se recogen los datos al cambiar los inputs del formulario
+  const handleShownTrainers = (value, index, id) => {
     if (id === "name") {
       arrShownTrainers[index].name = value;
     } else if (id === "reputation") {

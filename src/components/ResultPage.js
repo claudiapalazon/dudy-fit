@@ -10,17 +10,22 @@ function ResultPage(props) {
   const arr = JSON.parse(JSON.stringify(props.trainers));
   let clients = JSON.parse(JSON.stringify(dataClients));
   const [globalValoration, setGlovalValoration] = useState(0);
+  const [listFinalTrainers, setListFinalTrainers] = useState([]);
 
   const handlePlaces = (trainers) => {
+    // Comprueba si hay suficientes plazas para los clientes.
     let places = 0;
     for (let i = 0; i < trainers.length; i++) {
       places += trainers[i].places;
     }
     places < clients.length ? (sufPlaces = true) : (sufPlaces = false);
+    // Comprueba si hay más plazas que clientes.
     let restPlaces = 0;
     if (places > clients.length) {
       restPlaces = places - clients.length;
     }
+
+    // Ordena los entrenadores de menor a mayor reputación. Si hay más plazas que clientes, comprueba si hay más en los entrenadores con poca reputación, y los resta o elimina a ese entrenador de la asignación.
     trainers.sort(function (a, b) {
       return a.reputation - b.reputation;
     });
@@ -41,6 +46,7 @@ function ResultPage(props) {
       }
     }
   };
+  // Multiplica por dos la reputación para poder compararla con la importancia de los clientes.
   const handleReputation = (trainers) => {
     trainers.forEach((trainer) => (trainer.reputation *= 2));
   };
@@ -48,44 +54,51 @@ function ResultPage(props) {
   handlePlaces(arr);
   handleReputation(arr);
 
+  // Recibe la media global de satisfacción así como la lista con cada cliente, su entrenador asignado y la satisfacción con éste.
   let numValoration;
-  const handleNumValoration = (valoration) => {
+  let finalValTrainers = [];
+  const handleNumValoration = (valoration, trainers) => {
     numValoration = valoration;
+    finalValTrainers = trainers;
   };
-
   const handleValoration = () => {
     setGlovalValoration(numValoration);
+    setListFinalTrainers(finalValTrainers);
   };
 
   return (
     <>
       <Row>
-        <Col>
-          <Tabs
-            className="results"
-            defaultActiveKey="results"
-            id="uncontrolled-tab-example"
-            onSelect={handleValoration}
-          >
-            <Tab eventKey="results" title="Resultados">
-              {sufPlaces ? (
-                <h1>No hay suficientes plazas para los clientes</h1>
-              ) : (
+        {sufPlaces ? (
+          <p className="sufplaces">
+            No hay suficientes plazas para los clientes
+          </p>
+        ) : (
+          <Col>
+            <Tabs
+              className="results"
+              defaultActiveKey="results"
+              id="uncontrolled-tab-example"
+              onSelect={handleValoration}
+            >
+              <Tab eventKey="results" title="Entrenadores">
                 <ResultView
                   trainers={arr}
                   clients={clients}
                   trainersfiltered={props.trainers}
                   handleValoration={handleNumValoration}
                 />
-              )}
-            </Tab>
-            <Tab eventKey="satisfaction" title="Valoración Global">
-              <Valoration globalValoration={globalValoration} />
-            </Tab>
-          </Tabs>
-        </Col>
+              </Tab>
+              <Tab eventKey="satisfaction" title="Valoración del conjunto">
+                <Valoration
+                  globalValoration={globalValoration}
+                  listFinalTrainers={listFinalTrainers}
+                />
+              </Tab>
+            </Tabs>
+          </Col>
+        )}
       </Row>
-
       <Link to="/" className="btn-sm btn-primary float-right button">
         Volver
       </Link>

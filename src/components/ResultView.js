@@ -7,10 +7,12 @@ function ResultView(props) {
   let trainers = JSON.parse(JSON.stringify(props.trainers));
   let finalTrainers = [];
 
+  // Ordena los clientes de menor a mayor en función de su importancia de reputación.
   clients.sort(function (a, b) {
     return a.impReputation - b.impReputation;
   });
 
+  // A cada cliente se le asigna la satisfacción de si se le asigna cada uno de los entrenadores disponibles.
   for (let i = 0; i < clients.length; i++) {
     clients[i].satisfaction = [];
     for (let index = 0; index < trainers.length; index++) {
@@ -28,6 +30,7 @@ function ResultView(props) {
     }
   }
 
+  // Apartado de la asignación. Se asignan en orden desde el cliente con menor importancia de la reputación al que más importancia le da. 
   for (let i = 0; i < clients.length; i++) {
     for (let index = 0; index < clients[i].satisfaction.length; index++) {
       if (
@@ -68,16 +71,13 @@ function ResultView(props) {
       }
     }
   }
-  console.log(clients);
-  console.log(finalTrainers);
-  console.log(props.trainers);
-  console.log(props.trainersfiltered);
 
+  // Se calcula la valoración global ya que tenemos los valores de satisfacción de cada cliente con su entrenador asignado.
   let globalValoration = 0;
   for (let i = 0; i < finalTrainers.length; i++) {
     globalValoration += finalTrainers[i].satisfaction;
   }
-  props.handleValoration(globalValoration);
+  props.handleValoration(globalValoration, finalTrainers);
 
   const finalArr = props.trainersfiltered.map((trainer, index) => {
     return (

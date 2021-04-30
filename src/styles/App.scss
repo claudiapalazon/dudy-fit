@@ -43,3 +43,20 @@ body {
 .clienAsign {
   margin: 0px;
 }
+.progressbar {
+  margin-bottom: 20px;
+}
+
+.sufplaces {
+  margin: 200px 10px 0 10px !important;
+  text-align: center;
+}
+
+.valoration {
+  padding: 20px !important;
+  border: 1px solid #dee2e6;
+  text-align: center;
+  @media (min-width: 576px) {
+    max-width: 900px !important;
+  }
+}

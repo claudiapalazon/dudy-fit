@@ -3,9 +3,13 @@ import { Form, Alert } from "react-bootstrap";
 
 function TrainersForm(props) {
   const [show, setShow] = useState(false);
+
+  // No deja podner más del número de clientes en el input del formulario "Número máximo de clientes"
   const optionPlaces = props.clients.map((client, number) => {
     return <option key={number}>{number + 1}</option>;
   });
+
+  // Formulario con cada uno de los entrenadores. Se comprueba si los valores son correctos.
   const handleInputs = (env) => {
     let value = env.currentTarget.value;
     let index = props.index;
