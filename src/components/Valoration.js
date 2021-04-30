@@ -11,11 +11,12 @@ function Valoration(props) {
     );
   });
   let number = props.globalValoration.toFixed(1);
+  let progressNum = number * 10;
   return (
     <Container className="valoration">
       <h3>Valoración global</h3>
       <h4>{number}</h4>
-      <ProgressBar className="progressbar" now={number} />
+      <ProgressBar className="progressbar" now={progressNum} />
       <p className="solutionText">
         La valoración global corresponde a la media de los valores de
         satisfacción de los clientes con sus entrenadores asignados.

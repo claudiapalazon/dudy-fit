@@ -30,7 +30,7 @@ function ResultView(props) {
     }
   }
 
-  // Apartado de la asignación. Se asignan en orden desde el cliente con menor importancia de la reputación al que más importancia le da. 
+  // Apartado de la asignación. Se asignan en orden desde el cliente con menor importancia de la reputación al que más importancia le da.
   for (let i = 0; i < clients.length; i++) {
     for (let index = 0; index < clients[i].satisfaction.length; index++) {
       if (
@@ -77,6 +77,7 @@ function ResultView(props) {
   for (let i = 0; i < finalTrainers.length; i++) {
     globalValoration += finalTrainers[i].satisfaction;
   }
+  globalValoration /= clients.length;
   props.handleValoration(globalValoration, finalTrainers);
 
   const finalArr = props.trainersfiltered.map((trainer, index) => {
