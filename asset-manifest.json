@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/dudy-fit/static/css/main.45413bb6.chunk.css",
-    "main.js": "/dudy-fit/static/js/main.d63c9dab.chunk.js",
-    "main.js.map": "/dudy-fit/static/js/main.d63c9dab.chunk.js.map",
+    "main.js": "/dudy-fit/static/js/main.280604ee.chunk.js",
+    "main.js.map": "/dudy-fit/static/js/main.280604ee.chunk.js.map",
     "runtime-main.js": "/dudy-fit/static/js/runtime-main.bdb26a28.js",
     "runtime-main.js.map": "/dudy-fit/static/js/runtime-main.bdb26a28.js.map",
     "static/css/2.4c97ca4f.chunk.css": "/dudy-fit/static/css/2.4c97ca4f.chunk.css",
@@ -19,6 +19,6 @@
     "static/css/2.4c97ca4f.chunk.css",
     "static/js/2.7fd42c9c.chunk.js",
     "static/css/main.45413bb6.chunk.css",
-    "static/js/main.d63c9dab.chunk.js"
+    "static/js/main.280604ee.chunk.js"
   ]
 }
