@@ -16,16 +16,23 @@ function Valoration(props) {
       <h3>Valoración global</h3>
       <h4>{number}</h4>
       <ProgressBar className="progressbar" now={number} />
-      <p>
-        Para calcular la valoración global se ha realizado una media de la
+      <p className="solutionText">
+        La valoración global corresponde a la media de los valores de
         satisfacción de los clientes con sus entrenadores asignados.
-        <br />
-        Para hacer esa asignación, se ha partido de comprobar la satisfacción de
-        cada cliente con cada uno de los entrenadores. Teniendo en cuenta la
-        importancia de la valoración de los clientes, posteriormente se han
-        seleccionado los más idóneos para cada uno teniendo en cuenta conseguir
-        la mayor valoración global. A continuación se muestran los datos de cada
-        cliente con su entrenador asignado y la satisfacción con éste.
+      </p>
+      <p className="solutionText">
+        Para llevar a cabo dicha asignación, se ha calculado previamente el
+        valor de la satisfacción de los clientes con cada uno de los
+        entrenadores, con el fin de obtener la mayor satisfacción posible. Para
+        obtener el valor de satisfacción de cada cliente con los diferentes
+        entrenadores, se ha calculado la siguiente operación: 10 - (importancia
+        de la reputación - reputación del entrenador). Obteniendo de esta manera
+        un valor comprendido entre 0 y 10, siendo 0 la menor satisfacción y 10
+        la mayor (los valores obtenidos por encima de 10 se toman como 10).
+        <p className="solutionText">
+          <br />A continuación se muestran el valor de satisfacción de cada
+          cliente con su entrenador asignado:
+        </p>
       </p>
       <ListGroup variant="flush">{valorations}</ListGroup>
     </Container>
